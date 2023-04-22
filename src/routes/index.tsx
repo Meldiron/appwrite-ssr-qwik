@@ -39,7 +39,7 @@ export default component$(() => {
 
     isLoading.value = true;
     try {
-      const res = await fetch("/login", {
+      await fetch("/login", {
         method: "POST",
         body: "",
       });
