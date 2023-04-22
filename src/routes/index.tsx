@@ -30,7 +30,7 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
 export default component$(() => {
   const account = useAccountLoader();
 
-  console.log(account);
+  console.log(account.value);
 
   const isLoading = useSignal(false);
   const modalMessage = useSignal("");
