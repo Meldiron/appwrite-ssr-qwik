@@ -1,6 +1,10 @@
 import { component$, $, useSignal } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
-import { AppwriteProject, AppwriteService } from "~/AppwriteService";
+import {
+  AppwriteProject,
+  AppwriteService,
+  AppwriteEndpoint,
+} from "~/AppwriteService";
 import Card from "~/components/Card";
 
 export const useAccountLoader = routeLoader$(async ({ cookie }) => {
@@ -13,25 +17,33 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
     cookie.get(sessionNames[0])?.value ??
     cookie.get(sessionNames[1])?.value ??
     "";
-  AppwriteService.setSession(hash);
+
+  const authCookies: any = {};
+  authCookies["a_session_" + AppwriteProject] = hash;
 
   let account;
   try {
-    account = await AppwriteService.getAccount();
+    const response = await fetch(`${AppwriteEndpoint}/account`, {
+      method: "GET",
+      headers: {
+        "x-appwrite-project": AppwriteProject,
+        "x-fallback-cookies": JSON.stringify(authCookies),
+      },
+    });
+
+    account = await response.json();
   } catch (err) {
     console.log(err);
     account = null;
   }
 
   return {
-    account
+    account,
   };
 });
 
 export default component$(() => {
   const account = useAccountLoader();
-
-  console.log(account.value);
 
   const isLoading = useSignal(false);
   const modalMessage = useSignal("");

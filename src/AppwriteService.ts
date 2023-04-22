@@ -21,10 +21,5 @@ export const AppwriteService = {
 	},
 	getAccountPicture: (name: string) => {
 		return avatars.getInitials(name.split("").reverse().join(""), 256, 256).toString();
-	},
-	setSession: (hash: string) => {
-		const authCookies: any = {};
-		authCookies['a_session_' + AppwriteProject] = hash;
-		client.headers['X-Fallback-Cookies'] = JSON.stringify(authCookies);
 	}
 };
