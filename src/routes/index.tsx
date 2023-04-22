@@ -31,6 +31,10 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
       },
     });
 
+    if(response.status >= 400) {
+      throw new Error(await response.text());
+    }
+
     account = await response.json();
   } catch (err) {
     console.log(err);
