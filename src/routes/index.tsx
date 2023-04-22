@@ -9,6 +9,9 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
     "a_session_" + AppwriteProject.toLowerCase() + "_legacy",
   ];
 
+  console.log(cookie.get(sessionNames[0]));
+  console.log(cookie.get(sessionNames[1]));
+
   const hash =
     cookie.get(sessionNames[0])?.value ??
     cookie.get(sessionNames[1])?.value ??
