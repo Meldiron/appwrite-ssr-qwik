@@ -13,7 +13,6 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
     cookie.get(sessionNames[0])?.value ??
     cookie.get(sessionNames[1])?.value ??
     "";
-    console.log(hash);
   AppwriteService.setSession(hash);
 
   let account;
@@ -30,6 +29,8 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
 
 export default component$(() => {
   const account = useAccountLoader();
+
+  console.log(account);
 
   const isLoading = useSignal(false);
   const modalMessage = useSignal("");
