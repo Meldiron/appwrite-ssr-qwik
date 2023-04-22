@@ -19,11 +19,12 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
   try {
     account = await AppwriteService.getAccount();
   } catch (err) {
+    console.log(err);
     account = null;
   }
 
   return {
-    account,
+    account
   };
 });
 
