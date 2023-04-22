@@ -34,12 +34,30 @@ export default component$(() => {
   const modalMessage = useSignal("");
   const modalType = useSignal("");
 
-  const onCreateSession = $(async (event: any) => {
-    event.preventDefault();
+  const onCreateSession = $(async () => {
+    const dialog: any = document.getElementById("dialog");
+
+    isLoading.value = true;
+    try {
+      const res = await fetch("/login", {
+        method: "POST",
+        body: "",
+      });
+
+      modalType.value = "success";
+      modalMessage.value =
+        "Session created! Refresh page to run SSR check, or re-fetch to run CSR cehck.";
+      dialog.showModal();
+    } catch (err: any) {
+      modalType.value = "error";
+      modalMessage.value = err.message;
+      dialog.showModal();
+    } finally {
+      isLoading.value = false;
+    }
   });
 
-  const onDeleteSession = $(async (event: any) => {
-    event.preventDefault();
+  const onDeleteSession = $(async () => {
     const dialog: any = document.getElementById("dialog");
 
     isLoading.value = true;
@@ -119,13 +137,13 @@ export default component$(() => {
                     <div class="loader" />
                   ) : (
                     <>
-                      <form onSubmit$={onCreateSession}>
+                      <form preventdefault:submit onSubmit$={onCreateSession}>
                         <button class="button" type="submit">
                           Create Anonymous Account
                         </button>
                       </form>
 
-                      <form onSubmit$={onDeleteSession}>
+                      <form preventdefault:submit onSubmit$={onDeleteSession}>
                         <button class="button is-secondary" type="submit">
                           Sign Out
                         </button>

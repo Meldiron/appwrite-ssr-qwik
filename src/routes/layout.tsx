@@ -40,14 +40,14 @@ export default component$(() => {
             <ul class="buttons-list is-with-padding">
               <li class="buttons-list-item">
                 <a
-                  href="https://github.com/Meldiron/appwrite-ssr-svelte-kit"
+                  href="https://github.com/Meldiron/appwrite-ssr-qwik"
                   target="_blank"
                   class="button is-secondary is-not-mobile"
                 >
                   <span class="text">View on GitHub</span>
                 </a>
                 <a
-                  href="https://github.com/Meldiron/appwrite-ssr-svelte-kit"
+                  href="https://github.com/Meldiron/appwrite-ssr-qwik"
                   target="_blank"
                   class="button is-secondary is-only-mobile"
                 >
