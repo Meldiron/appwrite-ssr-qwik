@@ -148,7 +148,7 @@ export default component$(() => {
                     </a>
                   </li>
                   <li class="drop-list-item">
-                    <a class="drop-button u-cross-center" href="/">
+                    <a class="drop-button u-cross-center" href="https://remix.ssr.almostapps.eu/">
                       <svg
                         role="img"
                         width="16"
@@ -162,7 +162,6 @@ export default component$(() => {
                         />
                       </svg>
                       <span class="text">Remix</span>
-                      <code class="inline-code">WIP</code>
                     </a>
                   </li>
                   <li class="drop-list-item">
