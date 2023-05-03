@@ -14,8 +14,6 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
     cookie.get(sessionNames[1])?.value ??
     "";
 
-  console.log(hash);
-
   AppwriteService.setSession(hash);
 
   let account;
