@@ -3,7 +3,6 @@ import { routeLoader$ } from "@builder.io/qwik-city";
 import {
   AppwriteProject,
   AppwriteService,
-  AppwriteEndpoint,
 } from "~/AppwriteService";
 import Card from "~/components/Card";
 
@@ -17,15 +16,15 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
     cookie.get(sessionNames[0])?.value ??
     cookie.get(sessionNames[1])?.value ??
     "";
-    
-    AppwriteService.setSession(hash);
 
-    let account;
-    try {
-      account = await AppwriteService.getAccount();
-    } catch (err) {
-      account = null;
-    }
+  AppwriteService.setSession(hash);
+
+  let account;
+  try {
+    account = await AppwriteService.getAccount();
+  } catch (err) {
+    account = null;
+  }
 
   return {
     account,
