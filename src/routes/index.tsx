@@ -1,6 +1,6 @@
 import { component$, $, useSignal } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
-import { AppwriteEndpoint, AppwriteProject, AppwriteService } from "~/AppwriteService";
+import { AppwriteProject, AppwriteService } from "~/AppwriteService";
 import Card from "~/components/Card";
 
 export const useAccountLoader = routeLoader$(async ({ cookie }) => {
@@ -16,32 +16,9 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
 
   AppwriteService.setSession(hash);
 
-  // let account;
-  // try {
-  //   account = await AppwriteService.getAccount();
-  // } catch (err) {
-  //   console.log(err);
-  //   account = null;
-  // }
-
-  // Neccessary fix row now, until "XMLHttpRequest is not defined" is fixed
-  const authCookies: any = {};
-  authCookies["a_session_" + AppwriteProject] = hash;
   let account;
   try {
-    const response = await fetch(`${AppwriteEndpoint}/account`, {
-      method: "GET",
-      headers: {
-        "x-appwrite-project": AppwriteProject,
-        "x-fallback-cookies": JSON.stringify(authCookies),
-      },
-    });
-
-    if(response.status >= 400) {
-      throw new Error(await response.text());
-    }
-
-    account = await response.json();
+    account = await AppwriteService.getAccount();
   } catch (err) {
     console.log(err);
     account = null;
