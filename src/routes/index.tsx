@@ -1,9 +1,6 @@
 import { component$, $, useSignal } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
-import {
-  AppwriteProject,
-  AppwriteService,
-} from "~/AppwriteService";
+import { AppwriteProject, AppwriteService } from "~/AppwriteService";
 import Card from "~/components/Card";
 
 export const useAccountLoader = routeLoader$(async ({ cookie }) => {
@@ -16,6 +13,8 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
     cookie.get(sessionNames[0])?.value ??
     cookie.get(sessionNames[1])?.value ??
     "";
+
+  console.log(hash);
 
   AppwriteService.setSession(hash);
 
