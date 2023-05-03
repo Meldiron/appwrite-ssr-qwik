@@ -17,29 +17,15 @@ export const useAccountLoader = routeLoader$(async ({ cookie }) => {
     cookie.get(sessionNames[0])?.value ??
     cookie.get(sessionNames[1])?.value ??
     "";
+    
+    AppwriteService.setSession(hash);
 
-  const authCookies: any = {};
-  authCookies["a_session_" + AppwriteProject] = hash;
-
-  let account;
-  try {
-    const response = await fetch(`${AppwriteEndpoint}/account`, {
-      method: "GET",
-      headers: {
-        "x-appwrite-project": AppwriteProject,
-        "x-fallback-cookies": JSON.stringify(authCookies),
-      },
-    });
-
-    if(response.status >= 400) {
-      throw new Error(await response.text());
+    let account;
+    try {
+      account = await AppwriteService.getAccount();
+    } catch (err) {
+      account = null;
     }
-
-    account = await response.json();
-  } catch (err) {
-    console.log(err);
-    account = null;
-  }
 
   return {
     account,
