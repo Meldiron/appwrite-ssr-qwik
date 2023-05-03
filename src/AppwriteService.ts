@@ -26,7 +26,5 @@ export const AppwriteService = {
 		const authCookies: any = {};
 		authCookies['a_session_' + AppwriteProject] = hash;
 		client.headers['X-Fallback-Cookies'] = JSON.stringify(authCookies);
-
-		console.log(client.headers);
 	}
 };
