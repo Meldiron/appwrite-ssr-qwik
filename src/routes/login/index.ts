@@ -7,7 +7,7 @@ import {
   SsrHostname,
 } from "~/AppwriteService";
 
-// Called when the HTTP method is GET
+// Called when the HTTP method is POST
 export const onPost: RequestHandler = async (requestEvent) => {
   try {
     const response = await fetch(
